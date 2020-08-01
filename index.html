@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Near Beers</title>
 </head>
 <body>
+    <header class="hero-search-filter">
+        <div class="hero-search-filter-content">
+          <img class="hero-search-filter-logo" src="https://placehold.it/160x80" alt="" />
+          <form class="hero-search-filter-form" action="">
+            <label for="findtext">Find</label>
+            <input id="findtext" class="hero-search-filter-form-find" type="text" />
+            <div class="divider">&nbsp;</div>
+            <label for="findlocate">Near</label>
+            <input id="findlocate" class="hero-search-filter-form-near" type="text" />
+            <button class="button"><i class="fa fa-search"></i></button>
+          </form>
+          <ul class="hero-search-filter-menu menu align-center">
+            <li><a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Restaurants</a></li>
+            <li><a href="#"><i class="fa fa-glass" aria-hidden="true"></i> Nightlife</a></li>
+            <li><a href="#"><i class="fa fa-wrench" aria-hidden="true"></i> Home Services</a></li>
+            <li><a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i> Delivery</a></li>
+          </ul>
+        </div>
+      </header>
   
 </body>
 </html>

@@ -1,6 +1,6 @@
 
 .hero-search-filter {
-    background: url("https://images.pexels.com/photos/115095/pexels-photo-115095.jpeg?w=940&h=650&auto=compress&cs=tinysrgb") center center no-repeat;
+    background: url("https://slolifemagazine.com/wp-content/uploads/2017/10/craft-beer.jpg") center center no-repeat;
     height: 300px;
     background-size: cover;
     display: -webkit-flex;
@@ -115,16 +115,62 @@
   }
   
  
-.work-feature-block {
-    padding: 10px 0;
-    border-top: 1px solid #cacaca;
-    border-bottom: 1px solid #cacaca;
+
+  .holy-grail-grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 4fr;
+        grid-template-columns: 1fr 4fr;
+    -ms-grid-rows: 1fr 8fr 1fr;
+        grid-template-rows: 1fr 8fr 1fr;
+    grid-gap: 20px;
+    height: 100vh;
   }
   
-  .work-feature-block-image {
-    display: block;
-    margin: auto;
-    padding: 10px 0;
+  @media screen and (max-width: 60em) {
+    .holy-grail-grid {
+      -ms-grid-rows: 2fr 1fr 5fr 1fr;
+          grid-template-rows: 2fr 1fr 5fr 1fr;
+    }
   }
+  
+  .holy-grail-left,
+  .holy-grail-middle,
+  .holy-grail-footer {
+    padding: 1rem;
+    border: 1px solid #ededed;
+    background-color: #ededed;
+  }
+  
+  
+  @media screen and (max-width: 60em) {
+    .holy-grail-left {
+      -ms-grid-row: 2;
+          grid-row-start: 2;
+      -ms-grid-column: 1;
+          grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+  
+  @media screen and (max-width: 60em) {
+    .holy-grail-middle {
+      -ms-grid-row: 3;
+          grid-row-start: 3;
+      -ms-grid-column: 1;
+          grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  }
+  
+  .holy-grail-footer {
+    -ms-grid-column: 1;
+        grid-column-start: 1;
+    grid-column-end: 4;
+  }
+  
+  
+
+
   
   

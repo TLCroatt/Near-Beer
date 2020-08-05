@@ -35,3 +35,25 @@ function renderHistory(){
         let searchedCity = $(this).attr("cityName");
     });
 };
+
+//function to create url based on search type
+function createBreweryURL(){
+    searchtype =$(#"dropdownId").value;  //needs to be changed to dropdown ID
+    var url = "";
+    numBrew = 5;
+    switch(searchtype){
+        case city:
+            url = "https://api.openbrewerydb.org/breweries?by_city=" + text +"&per_page="+ numBrew;  
+            break;
+        case name:
+            url = "https://api.openbrewerydb.org/breweries?by_name=" + text +"&per_page="+ numBrew;
+            break;
+        case zipcode:
+            url ="https://api.openbrewerydb.org/breweries?by_city=" + text +"&per_page="+ numBrew;
+            break;
+        default:
+            url ="https://api.openbrewerydb.org/breweries?by_name=" + text +"&per_page="+ numBrew;
+            break;
+    } 
+    return url;  
+}

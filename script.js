@@ -52,7 +52,7 @@ function createBreweryURL(){
     var searchtype ="city"//$(#"dropdownId").value;  //needs to be changed to dropdown ID
     var city = "Denver"
     var url = "";
-    numBrew = 5;
+    var numBrew = 5;
     switch(searchtype){
         case "city":
             url = "https://api.openbrewerydb.org/breweries?by_city=" + city +"&per_page="+ numBrew;  

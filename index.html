@@ -20,17 +20,33 @@
 <body>
     <header class="hero-search-filter">
         <div class="hero-search-filter-content">
-          <form class="hero-search-filter-form" action="">
-            <label for="findtext">Find Beer</label>
-            <input id="findtext" class="hero-search-filter-form-find" type="text" />
-          </form>
+            <form data-abide novalidate>
+                <div class="grid-x grid-margin-x">
+                  <div class="cell">
+                    <div data-abide-error class="alert callout" style="display: none;">
+                      <p><i class="fi-alert"></i> There are some errors in your form.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid-x grid-margin-x">
+                  <div class="cell small-12">
+                    <label for="findtext">Find Beers Near</label>
+                      <input type="text" placeholder="Find Beers" aria-describedby="exampleHelpTextNumber" required pattern="number">
+                      <span class="form-error">
+                        Please enter city, zip code, or brewery name.
+                      </span>
+                    
+                  </div>
         </div>
-        <hr>
-        <div class="row button-group">
-            <a class="button">City</a>
-            <a class="button">Zip Code</a>
-            <a class="button">Brewery Name</a>
-        </div>
+        <div class="cell medium-6">
+            <label for="searchtext">Search By</label>
+              <select id="select" required>
+                <option value=""></option>
+                <option value="City">City</option>
+                <option value="Zip-Code">Zip Code</option>
+                <option value="Brewery-Name">Brewery Name</option>
+              </select>
+          </div>
       </header>
     
       
@@ -81,10 +97,8 @@
               <p>Shrink the browser width to see me stack. I do tricks for dog treats, but I'm not a dog.</p>
             </div>
         </div>
-      
-      
-        
-      </div>
+
+        </div>
 
       <div class="holy-grail-footer">
         <h3>Footer</h3>

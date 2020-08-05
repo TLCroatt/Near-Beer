@@ -38,22 +38,24 @@ function renderHistory(){
 
 //function to create url based on search type
 function createBreweryURL(){
-    searchtype =$(#"dropdownId").value;  //needs to be changed to dropdown ID
+    var searchtype ="city"   //$(#"dropdownId").value;  //needs to be changed to dropdown ID
+    var city = "Denver"
     var url = "";
-    numBrew = 5;
+    var numBrew = 5;
     switch(searchtype){
-        case city:
-            url = "https://api.openbrewerydb.org/breweries?by_city=" + text +"&per_page="+ numBrew;  
+        case "city":
+            url = "https://api.openbrewerydb.org/breweries?by_city=" + city +"&per_page="+ numBrew;  
             break;
-        case name:
-            url = "https://api.openbrewerydb.org/breweries?by_name=" + text +"&per_page="+ numBrew;
+        case "name":
+            url = "https://api.openbrewerydb.org/breweries?by_name=" + city +"&per_page="+ numBrew;
             break;
-        case zipcode:
-            url ="https://api.openbrewerydb.org/breweries?by_city=" + text +"&per_page="+ numBrew;
+        case "zipcode":
+            url ="https://api.openbrewerydb.org/breweries?by_postal=" + city +"&per_page="+ numBrew;
             break;
         default:
-            url ="https://api.openbrewerydb.org/breweries?by_name=" + text +"&per_page="+ numBrew;
+            url ="https://api.openbrewerydb.org/breweries?by_name=" + city +"&per_page="+ numBrew;
             break;
     } 
-    return url;  
+    console.log(url);
+    return url;
 }

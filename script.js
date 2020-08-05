@@ -1,4 +1,5 @@
 $("#search").on("click", function() {
+    console.log("here")
     event.preventDefault();
     event.stopPropagation();
     let city = $("#city-input").val().trim();
@@ -6,11 +7,21 @@ $("#search").on("click", function() {
         // The following clears the error if something is typed in the search field that isn't accepted
         $("#city-input").html("")
         
-        //console.log(localStorage.getItem("city"));
+        console.log(localStorage.getItem("city"));
         searchCity(city);
         brewery(city);
         addHistory(city);
-        renderHistory()
+        renderHistory();
+
+        $.ajax({
+            url: createBreweryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+        })
+        
+        //clear search results on new search
+        //$("")
     }
     else {
         $("#city-input").html("Field cannot be empty");
@@ -38,8 +49,9 @@ function renderHistory(){
 
 //function to create url based on search type
 function createBreweryURL(){
-    searchtype =$(#"dropdownId").value;  //needs to be changed to dropdown ID
+    var searchtype = "city"; //$(#"dropdownId").value;  //needs to be changed to dropdown ID
     var url = "";
+    var text = "Denver";
     numBrew = 5;
     switch(searchtype){
         case city:
@@ -55,5 +67,7 @@ function createBreweryURL(){
             url ="https://api.openbrewerydb.org/breweries?by_name=" + text +"&per_page="+ numBrew;
             break;
     } 
-    return url;  
+      return url; 
 }
+
+

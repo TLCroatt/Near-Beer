@@ -28,9 +28,6 @@
             justify-content: center;
   }
   
-  .button-group {
-    max-height: fit-content;
-  }
   
   .hero-search-filter-form {
     display: -webkit-flex;
@@ -40,16 +37,16 @@
     background: #fefefe;
     padding: 0.25rem;
     border-radius: 5px;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
   }
   
+  .dropdown, .button {
+    border-radius: 5px;
+  }
   
   .hero-search-filter-form label {
     margin-right: 0.75rem;
     margin-left: 0.75rem;
-    color: #8a8a8a;
+    color: #747171;
     font-weight: bold;
   }
   
@@ -76,9 +73,6 @@
     box-shadow: none;
   }
   
-  .hero-row {
-    background: #fefefe;
-  }
  
 
   .holy-grail-grid {

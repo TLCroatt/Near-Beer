@@ -3,6 +3,7 @@ var city = "";
 var cities = [];
 var text = "";
 var searchType = "";
+var brewList = [];
 
 const displayNum = 3;
 
@@ -48,7 +49,7 @@ function createBreweryURL(){
     var searchtype ="city"//$(#"dropdownId").value;  //needs to be changed to dropdown ID
     var city = "Denver"
     var url = "";
-    var numBrew = 5;
+    var numBrew = displayNum;
     switch(searchtype){
         case "city":
             url = "https://api.openbrewerydb.org/breweries?by_city=" + city +"&per_page="+ numBrew;  
@@ -69,6 +70,33 @@ function createBreweryURL(){
 
 function renderResults(response){
 
+    console.log("whereisit" + response);
+    for (i = 0; i < cities.length; i++) {
+        //
+        var outerDivEl = $("<div class= 'media-object stack-for-small'>");  
+        var mediaEl = $("<div class= 'media-object-section'>");
+        var thumbnailEl = $("<div class= 'thumbnail'>");
+        var imageEl = $("<img src= 'https://via.placeholder.com/200'>");
+        
+        $(thumbnailEl).append(imageEl);
+        $(mediaEl).append(thumbnailEl);
+        $(outerDivEl).append(mediaEl);
+
+        var media2El = $("<div class= 'media-object-section'>");
+        var nameEl = $("<h4>").text(response[i].name);
+        var addressEl = $("<p>").text(response[i].street);
+        var phoneNumberEl = $("<p>").text(response[i].phone);
+        var urlEl = $("<p>").text(response[i].website_url);
+
+        $(nameEl).append(media2El);
+        $(addressEl).append(media2El);
+        $(phoneNumberEl).append(media2El);
+        $(urlEl).append(media2El);
+
+        $(outerDivEl).append(media2El);
+        $("#search-results").append(outerDivEl);
+    }
+    
 }
 
 function callBrewAPI(){
@@ -87,7 +115,7 @@ function callBrewAPI(){
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            renderResults(response);
+
         })
     
     }

@@ -2,19 +2,19 @@ $("#search").on("click", function() {
     console.log("here")
     event.preventDefault();
     event.stopPropagation();
-    let city = $("#city-input").val().trim();
-    if (city != '') {
+    let city ="Denver" //$("#city-input").val().trim();
+    if (city !== "") {
         // The following clears the error if something is typed in the search field that isn't accepted
-        $("#city-input").html("")
+       $("#city-input").html("")
         
-        console.log(localStorage.getItem("city"));
-        searchCity(city);
-        brewery(city);
-        addHistory(city);
-        renderHistory();
+        // console.log(localStorage.getItem("city"));
+        // searchCity(city);
+        // brewery(city);
+        // addHistory(city);
+        // renderHistory();
 
         $.ajax({
-            url: createBreweryURL,
+            url: createBreweryURL(),
             method: "GET"
         }).then(function (response) {
             console.log(response);
@@ -70,5 +70,7 @@ function createBreweryURL(){
     console.log(url);
     return url; 
 }
+
+console.log("Entered JS");
 
 

@@ -131,6 +131,15 @@ function callBrewAPI(){
     }
 }
 
+$(document).keypress(function(event) {
+    console.log("here")
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      $("#search").click();
+    
+    }
+  });
+
 $("#history").on("click",function(){
     event.preventDefault();
     searchTerm.text = event.target.innerText;

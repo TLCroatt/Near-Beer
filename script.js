@@ -1,28 +1,39 @@
 //global variables
-var city = "";
-var cities = [];
-var text = "";
-var searchType = "";
+//var city = "";
+var searches = [];
+//var text = "";
+//var searchType = "";
 var brewList = [];
+var searchTerm = {text: "",
+                searchType: ""};
 
 const displayNum = 5;
 
 // Save the cities searched for
-function addHistory(city){ 
+function addHistory(searchTerm){ 
     // Check for changes in the local item and log them
-    var storedCities = JSON.parse(localStorage.getItem("cities"));
-    if(storedCities !== null){
-        cities = storedCities;
+    var index = -1
+    var storedSearches = JSON.parse(localStorage.getItem("searches"));
+    if(storedSearches !== null){
+        searches = storedSearches;
+        searchTerm.text.toUpperCase();
+console.log("searchTerm =" + searchTerm.text);
+        //find if search tearm is already stored
+        for (let i = 0; i < searches.length; i++) {
+            if(searches[i].text === searchTerm.text){
+                index = i;
+            }
+        }
+ console.log("index = " + index);
     }
 
-    city.toUpperCase();
-console.log("city =" +city);
-    var index = cities.indexOf(city);
-console.log("index = " + index);
+    //push SearchTerm into searches if it is not there
     if(index === -1){
-        cities.push(city);
-        localStorage.setItem("cities", JSON.stringify(cities));
+        searches.push(searchTerm);
+        localStorage.setItem("searches", JSON.stringify(searches));
     };
+
+    
     renderHistory();
 
 };
@@ -30,15 +41,15 @@ console.log("index = " + index);
 // Render the history localstorage
 function renderHistory(){
     $("#history").empty();
-    var storedCities = JSON.parse(localStorage.getItem("cities"));
-    if(storedCities !== null){
-        cities = storedCities;
+    var storedSearches = JSON.parse(localStorage.getItem("searches"));
+    if(storedSearches !== null){
+        searches = storedSearches;
     }
 
-    for (i = 0; i < cities.length; i++) {
+    for (i = 0; i < searches.length; i++) {
         //
         var listEl = $("<li>");  
-        $(listEl).append($("<button class='btn btn-info d-flex flex-column'>").attr("cityName", cities[i]).text(cities[i]));
+        $(listEl).append($("<button class='btn btn-info d-flex flex-column'>").attr("data-searchType", searches[i].searchType).text(searches[i].text));
         $("#history").append(listEl);
     }
     
@@ -48,18 +59,19 @@ function renderHistory(){
 function createBreweryURL(){
     var url = "";
     var numBrew = displayNum;
-    switch(searchType){
-        case "city":
-            url = "https://api.openbrewerydb.org/breweries?by_city=" + city +"&per_page="+ numBrew;  
+console.log("searchType= "+searchTerm.searchType)
+    switch(searchTerm.searchType){
+        case "City":
+            url = "https://api.openbrewerydb.org/breweries?by_city=" + searchTerm.text +"&per_page="+ numBrew;  
             break;
-        case "name":
-            url = "https://api.openbrewerydb.org/breweries?by_name=" + city +"&per_page="+ numBrew;
+        case "Brewery-Name":
+            url = "https://api.openbrewerydb.org/breweries?by_name=" + searchTerm.text +"&per_page="+ numBrew;
             break;
-        case "zipcode":
-            url ="https://api.openbrewerydb.org/breweries?by_postal=" + city +"&per_page="+ numBrew;
+        case "Zip-Code":
+            url ="https://api.openbrewerydb.org/breweries?by_postal=" + searchTerm.text +"&per_page="+ numBrew;
             break;
         default:
-            url ="https://api.openbrewerydb.org/breweries?by_name=" + city +"&per_page="+ numBrew;
+            url ="https://api.openbrewerydb.org/breweries?by_city=" + searchTerm.text +"&per_page="+ numBrew;
             break;
     } 
     console.log(url);
@@ -70,10 +82,9 @@ function renderResults(response){
     //clear container
     $("#search-results").empty();
 
+    // for each brewery in response
     for (i = 0; i < response.length; i++) {
-        console.log("name " + i +" = " + response[i].name);
-
-
+ 
         var outerDivEl = $("<div class= 'media-object stack-for-small'>");  
         var mediaEl = $("<div class= 'media-object-section'>");
         var thumbnailEl = $("<div class= 'thumbnail'>");
@@ -101,28 +112,21 @@ function renderResults(response){
 }
 
 function callBrewAPI(){
-    //let city ="Denver" //$("#city-input").val().trim();
-    if (city !== "") {
+    //if search term is not empty
+    if (searchTerm.text !== "") {
         // The following clears the error if something is typed in the search field that isn't accepted
        $("#city-input").html("")
         
-        // console.log(localStorage.getItem("city"));
-        // searchCity(city);
-        // brewery(city);
-        
-
         $.ajax({
             url: createBreweryURL(),
             method: "GET"
         }).then(function(response){
             var result = response;
-            console.log("response =" + result);
-            console.log("Name= "+response[0].name);
+ console.log("response =" + result);
+ console.log("Name= "+response[0].name);
             renderResults(response);
-
         });
-    
-    }
+    }//Need to add else statement here
 
     ////////////////////////////////////This is not working
     else {
@@ -132,20 +136,21 @@ function callBrewAPI(){
 
 $("#history").on("click",function(){
     event.preventDefault();
-    city = event.target.innerText;
+    searchTerm.text = event.target.innerText;
+    searchTerm.searchType = $(event.target).attr("data-searchType");
     callBrewAPI()
     
 });
 
 $("#search").on("click", function() {
-    console.log("here")
+console.log("here")
     event.preventDefault();
     event.stopPropagation();
 
-    searchType = $("#select").val();
-    city = $("#findtext").val().trim();
+    searchTerm.searchType = $("#select").val();
+    searchTerm.text = $("#findtext").val().trim();
    
-    addHistory(city);
+    addHistory(searchTerm);
     callBrewAPI();    
 });
 

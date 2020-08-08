@@ -26,8 +26,10 @@ function addHistory(searchTerm){
 
     //push SearchTerm into searches if it is not there
     if(index === -1){
-        searches.push(searchTerm);
-        localStorage.setItem("searches", JSON.stringify(searches));
+        if(searchTerm.text !== "" && searchTerm.text !== null){
+            searches.push(searchTerm);
+            localStorage.setItem("searches", JSON.stringify(searches));
+        }
     };
     renderHistory();
 };

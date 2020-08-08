@@ -6,6 +6,7 @@ var searchTerm = {text: "",
 //constants
 const displayNum = 5;  // number of breweries displayed
 const numBrew = 5;     // number of breweries limited in response 
+const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
 
 // Save the cities searched for
 function addHistory(searchTerm){ 
@@ -81,7 +82,9 @@ function renderResults(response){
         var outerDivEl = $("<div class= 'media-object stack-for-small'>");  
         var mediaEl = $("<div class= 'media-object-section'>");
         var thumbnailEl = $("<div class= 'thumbnail'>");
-        var imageEl = $("<img src= 'https://via.placeholder.com/200'>");
+        var imageEl = $("<img>");
+        imageEl.attr("src","https://www.mapquestapi.com/staticmap/v5/map?key="+mapApiKey+"&locations="+response[i].street+","+
+            response[i].city+","+response[i].state+"&size=200,200" )
         
         $(thumbnailEl).append(imageEl);
         $(mediaEl).append(thumbnailEl);

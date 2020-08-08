@@ -5,7 +5,7 @@ var text = "";
 var searchType = "";
 var brewList = [];
 
-const displayNum = 3;
+const displayNum = 5;
 
 // Save the cities searched for
 function addHistory(city){ 
@@ -46,11 +46,9 @@ function renderHistory(){
 
 //function to create url based on search type
 function createBreweryURL(){
-    var searchtype ="city"//$(#"dropdownId").value;  //needs to be changed to dropdown ID
-    var city = "Denver"
     var url = "";
     var numBrew = displayNum;
-    switch(searchtype){
+    switch(searchType){
         case "city":
             url = "https://api.openbrewerydb.org/breweries?by_city=" + city +"&per_page="+ numBrew;  
             break;
@@ -69,10 +67,13 @@ function createBreweryURL(){
 }
 
 function renderResults(response){
+    //clear container
+    $("#search-results").empty();
 
-    console.log("whereisit" + response);
-    for (i = 0; i < cities.length; i++) {
-        //
+    for (i = 0; i < response.length; i++) {
+        console.log("name " + i +" = " + response[i].name);
+
+
         var outerDivEl = $("<div class= 'media-object stack-for-small'>");  
         var mediaEl = $("<div class= 'media-object-section'>");
         var thumbnailEl = $("<div class= 'thumbnail'>");
@@ -88,9 +89,9 @@ function renderResults(response){
         var phoneNumberEl = $("<p>").text(response[i].phone);
         var urlEl = $("<p>").text(response[i].website_url);
 
-        $(nameEl).append(media2El);
-        $(addressEl).append(media2El);
-        $(phoneNumberEl).append(media2El);
+        $(media2El).append(nameEl);
+        $(media2El).append(addressEl);
+        $(media2El).append(phoneNumberEl);
         $(urlEl).append(media2El);
 
         $(outerDivEl).append(media2El);
@@ -113,10 +114,13 @@ function callBrewAPI(){
         $.ajax({
             url: createBreweryURL(),
             method: "GET"
-        }).then(function (response) {
-            console.log(response);
+        }).then(function(response){
+            var result = response;
+            console.log("response =" + result);
+            console.log("Name= "+response[0].name);
+            renderResults(response);
 
-        })
+        });
     
     }
 
@@ -129,8 +133,7 @@ function callBrewAPI(){
 $("#history").on("click",function(){
     event.preventDefault();
     city = event.target.innerText;
-    console.log("clicked city= "+city);
-    //render search results
+    callBrewAPI()
     
 });
 

@@ -1,13 +1,11 @@
 //global variables
-//var city = "";
 var searches = [];
-//var text = "";
-//var searchType = "";
 var brewList = [];
 var searchTerm = {text: "",
                 searchType: ""};
-
-const displayNum = 5;
+//constants
+const displayNum = 5;  // number of breweries displayed
+const numBrew = 5;     // number of breweries limited in response 
 
 // Save the cities searched for
 function addHistory(searchTerm){ 
@@ -17,14 +15,13 @@ function addHistory(searchTerm){
     if(storedSearches !== null){
         searches = storedSearches;
         searchTerm.text.toUpperCase();
-console.log("searchTerm =" + searchTerm.text);
+
         //find if search tearm is already stored
         for (let i = 0; i < searches.length; i++) {
             if(searches[i].text === searchTerm.text){
                 index = i;
             }
         }
- console.log("index = " + index);
     }
 
     //push SearchTerm into searches if it is not there
@@ -32,10 +29,7 @@ console.log("searchTerm =" + searchTerm.text);
         searches.push(searchTerm);
         localStorage.setItem("searches", JSON.stringify(searches));
     };
-
-    
     renderHistory();
-
 };
 
 // Render the history localstorage
@@ -46,8 +40,8 @@ function renderHistory(){
         searches = storedSearches;
     }
 
+    //add all searches to history
     for (i = 0; i < searches.length; i++) {
-        //
         var listEl = $("<li>");  
         $(listEl).append($("<button class='btn btn-info d-flex flex-column'>").attr("data-searchType", searches[i].searchType).text(searches[i].text));
         $("#history").append(listEl);
@@ -58,8 +52,6 @@ function renderHistory(){
 //function to create url based on search type
 function createBreweryURL(){
     var url = "";
-    var numBrew = displayNum;
-console.log("searchType= "+searchTerm.searchType)
     switch(searchTerm.searchType){
         case "City":
             url = "https://api.openbrewerydb.org/breweries?by_city=" + searchTerm.text +"&per_page="+ numBrew;  
@@ -74,7 +66,6 @@ console.log("searchType= "+searchTerm.searchType)
             url ="https://api.openbrewerydb.org/breweries?by_city=" + searchTerm.text +"&per_page="+ numBrew;
             break;
     } 
-    console.log(url);
     return url; 
 }
 
@@ -111,6 +102,11 @@ function renderResults(response){
     
 }
 
+function renderNotFound(){
+    $("#search-results").empty();
+    $("#search-results").append($("<h3>").text("No Results Found"));
+}
+
 function callBrewAPI(){
     //if search term is not empty
     if (searchTerm.text !== "") {
@@ -121,10 +117,11 @@ function callBrewAPI(){
             url: createBreweryURL(),
             method: "GET"
         }).then(function(response){
-            var result = response;
- console.log("response =" + result);
- console.log("Name= "+response[0].name);
-            renderResults(response);
+            if(response.length > 0){
+                renderResults(response);
+            }else{
+                renderNotFound();
+            }
         });
     }//Need to add else statement here
 

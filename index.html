@@ -20,6 +20,7 @@
 <body>
     <header class="hero-search-filter">
         <div class="hero-search-filter-content">
+            
             <form data-abide novalidate>
                 <div class="grid-x grid-margin-x">
                   <div class="cell">
@@ -29,7 +30,7 @@
                   </div>
                 </div>
                 <div class="grid-x grid-margin-x">
-                  <div class="cell medium-12">
+                  <div class="cell auto">
                       <input type="text" class="hero-search-filter-form" placeholder="Find Beers Near" id="findtext"/>
                       <span class="form-error">
                         Please enter city, zip code, or brewery name.
@@ -37,16 +38,19 @@
                     
                   </div>
                  </div>
-        <div class="cell medium-12">
-            <label for="searchtext">Search By</label>
-              <select class="dropdown" id="select" required>
-                <option value=""></option>
-                <option value="City">City</option>
-                <option value="Zip-Code">Zip Code</option>
-                <option value="Brewery-Name">Brewery Name</option>
-              </select>
-        </div>
-        <a class="button" id="search">Search</a>
+            
+            <div class="cell small-12">
+                <label for="searchtext">Search By</label>
+                <select class="dropdown" id="select" required>
+                    <option value=""></option>
+                    <option value="City">City</option>
+                    <option value="Zip-Code">Zip Code</option>
+                    <option value="Brewery-Name">Brewery Name</option>
+                </select>
+            </div>
+            <a class="button" id="search">Search</a>
+
+        </div> 
         
       </header>
     
@@ -55,7 +59,7 @@
       <div class="holy-grail-grid">
       
         <div class="holy-grail-left columns-med-4" >
-          <h3>Saved Searches</h3>
+          <h3>Previous Searches</h3>
           <ul id="history">
             <li><a href="#">Link 1</a></li>
             <li><a href="#">Link 2</a></li>
@@ -101,8 +105,15 @@
 
         </div>
 
-      <div class="holy-grail-footer">
-        <h3>Footer</h3>
+      <div class="footer small-align-self-bottom">
+        <div class="grid-x grid-margin-x"> 
+            <div class="cell auto">
+                <p>Made with <i class="fas fa-beer"></i></p>
+            </div>
+            <div class="cell auto">
+                <p><i class="far fa-copyright"></i>Group 2</p>
+            </div>
+        </div>
       </div>
 
       </div>

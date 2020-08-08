@@ -84,7 +84,7 @@ function renderResults(response){
         var thumbnailEl = $("<div class= 'thumbnail'>");
         var imageEl = $("<img>");
         imageEl.attr("src","https://www.mapquestapi.com/staticmap/v5/map?key="+mapApiKey+"&locations="+response[i].street+","+
-            response[i].city+","+response[i].state+"&size=200,200" )
+            response[i].city+","+response[i].state+"&size=300,250" )
         
         $(thumbnailEl).append(imageEl);
         $(mediaEl).append(thumbnailEl);
@@ -116,7 +116,7 @@ function callBrewAPI(){
     //if search term is not empty
     if (searchTerm.text !== "") {
         // The following clears the error if something is typed in the search field that isn't accepted
-       $("#city-input").html("")
+       
         
         $.ajax({
             url: createBreweryURL(),
@@ -128,12 +128,9 @@ function callBrewAPI(){
                 renderNotFound();
             }
         });
-    }//Need to add else statement here
-
-    ////////////////////////////////////This is not working
-    else {
-        $("#city-input").html("Field cannot be empty");
     }
+
+    
 }
 
 $(document).keypress(function(event) {
@@ -158,8 +155,11 @@ console.log("here")
     event.preventDefault();
     event.stopPropagation();
 
+
     searchTerm.searchType = $("#select").val();
     searchTerm.text = $("#findtext").val().trim();
+
+    $("#findtext").val("");
    
     addHistory(searchTerm);
     callBrewAPI();    

@@ -4,8 +4,8 @@ var brewList = [];
 var searchTerm = {text: "",
                 searchType: ""};
 //constants
-const displayNum = 5;  // number of breweries displayed
-const numBrew = 5;     // number of breweries limited in response 
+const displayNum = 10;  // number of breweries displayed
+const numBrew = 10;     // number of breweries limited in response 
 const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
 
 // Save the cities searched for

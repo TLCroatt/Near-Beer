@@ -3,10 +3,14 @@ var searches = [];
 var brewList = [];
 var searchTerm = {text: "",
                 searchType: ""};
+
 //constants
 const displayNum = 5;  // number of breweries displayed
 const numBrew = 5;     // number of breweries limited in response 
 const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
+
+//hide display box before search
+//$("#search-results").hide();
 
 // Save the cities searched for
 function addHistory(searchTerm){ 
@@ -41,7 +45,7 @@ function renderHistory(){
     var storedSearches = JSON.parse(localStorage.getItem("searches"));
     if(storedSearches !== null){
         searches = storedSearches;
-    }
+    } 
 
     //add all searches to history
     for (i = 0; i < searches.length; i++) {
@@ -75,7 +79,6 @@ function createBreweryURL(){
 function renderResults(response){
     //clear container
     $("#search-results").empty();
-
     // for each brewery in response
     for (i = 0; i < response.length; i++) {
  
@@ -155,7 +158,6 @@ console.log("here")
     event.preventDefault();
     event.stopPropagation();
 
-
     searchTerm.searchType = $("#select").val();
     searchTerm.text = $("#findtext").val().trim();
 
@@ -165,6 +167,13 @@ console.log("here")
     callBrewAPI();    
 });
 
+$("#clear").on("click", function() {
+    searches = [];
+    localStorage.removeItem("searches");
+    renderHistory();
+})
+
+$("#search-results").empty();
 renderHistory();
 
 

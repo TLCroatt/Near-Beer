@@ -3,10 +3,14 @@ var searches = [];
 var brewList = [];
 var searchTerm = {text: "",
                 searchType: ""};
+
 //constants
 const displayNum = 10;  // number of breweries displayed
 const numBrew = 50;     // number of breweries limited in response 
 const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
+
+//hide display box before search
+//$("#search-results").hide();
 
 // Save the cities searched for
 function addHistory(searchTerm){ 
@@ -41,7 +45,7 @@ function renderHistory(){
     var storedSearches = JSON.parse(localStorage.getItem("searches"));
     if(storedSearches !== null){
         searches = storedSearches;
-    }
+    } 
 
     //add all searches to history
     for (i = 0; i < searches.length; i++) {
@@ -115,7 +119,7 @@ function renderResults(response){
         var phoneNumberEl = $("<p>").text("Phone: "+response[i].phone);
         var urlEl = $("<a>").text("Website: " +response[i].website_url);
         urlEl.attr("href", response[i].website_url);
-        urlEl.attr({target: response[i].website_url, target:"_blank", rel:"noopener noreferrer"});
+        urlEl.attr({target:"_blank", rel:"noopener noreferrer"});
 
         $(media2El).append(nameEl);        
         $(media2El).append(addressEl);
@@ -179,6 +183,13 @@ console.log("here")
     callBrewAPI();    
 });
 
+$("#clear").on("click", function() {
+    searches = [];
+    localStorage.removeItem("searches");
+    renderHistory();
+})
+
+$("#search-results").empty();
 renderHistory();
 
 

@@ -5,7 +5,7 @@ var searchTerm = {text: "",
                 searchType: ""};
 //constants
 const displayNum = 10;  // number of breweries displayed
-const numBrew = 10;     // number of breweries limited in response 
+const numBrew = 50;     // number of breweries limited in response 
 const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
 
 // Save the cities searched for
@@ -76,8 +76,26 @@ function renderResults(response){
     //clear container
     $("#search-results").empty();
 
+    //create list of Breweries to display
+    var displayList = [];
+    if(response.length <= displayNum){
+        for (let i = 0; i < response.length; i++) {
+            displayList.push(i);            
+        }
+    }else{
+        while(displayList.length < displayNum){
+            var randNum = Math.floor(Math.random()*response.length);
+            if(displayList.indexOf(randNum) === -1) {
+                displayList.push(randNum);
+            }
+        }
+    }
+
+
     // for each brewery in response
-    for (i = 0; i < response.length; i++) {
+    for (j = 0; j < displayList.length; j++) {
+        //set index for display to value of displayList
+        var i = displayList[j];
  
         var outerDivEl = $("<div class= 'media-object stack-for-small'>");  
         var mediaEl = $("<div class= 'media-object-section'>");
@@ -95,7 +113,9 @@ function renderResults(response){
         var addressEl = $("<p>").text(response[i].street);
         var cityEl = $("<p>").text(response[i].city + ", "+response[i].state+"  "+ response[i].postal_code);
         var phoneNumberEl = $("<p>").text("Phone: "+response[i].phone);
-        var urlEl = $("<p>").text("Website:"+response[i].website_url);
+        var urlEl = $("<a>").text("Website: " +response[i].website_url);
+        urlEl.attr("href", response[i].website_url);
+        urlEl.attr({target: response[i].website_url, target:"_blank", rel:"noopener noreferrer"});
 
         $(media2El).append(nameEl);        
         $(media2El).append(addressEl);
@@ -117,9 +137,6 @@ function renderNotFound(){
 function callBrewAPI(){
     //if search term is not empty
     if (searchTerm.text !== "") {
-        // The following clears the error if something is typed in the search field that isn't accepted
-       
-        
         $.ajax({
             url: createBreweryURL(),
             method: "GET"
@@ -131,8 +148,6 @@ function callBrewAPI(){
             }
         });
     }
-
-    
 }
 
 $(document).keypress(function(event) {
@@ -140,7 +155,6 @@ $(document).keypress(function(event) {
     if (event.keyCode === 13) {
       event.preventDefault();
       $("#search").click();
-    
     }
   });
 
@@ -149,14 +163,12 @@ $("#history").on("click",function(){
     searchTerm.text = event.target.innerText;
     searchTerm.searchType = $(event.target).attr("data-searchType");
     callBrewAPI()
-    
 });
 
 $("#search").on("click", function() {
 console.log("here")
     event.preventDefault();
     event.stopPropagation();
-
 
     searchTerm.searchType = $("#select").val();
     searchTerm.text = $("#findtext").val().trim();

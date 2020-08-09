@@ -1,13 +1,15 @@
 # Near-Beer
-This is the first project.
+Are you thirsty?
 
 AS a beer enthusiast
 I WANT to enter a specific location 
 SO THAT I can quickly find some of the most popular local breweries in that area. 
 
+https://mrmathews08.github.io/Near-Beer/
+
 ## Description 
 
-Near Beers is a website that allows the user to enter any city, state, or zip code, as well as, the number of breweries the user would like to see. Once the search results populate, the user can view the brewery's location on the map and their contact information. The user will also be able to star or add breweries to a favorites list, so that they can quickly pull up the info on the go.
+Near Beers is a website that allows the user to enter any city, state, or zip code, as well as, the number of breweries the user would like to see. Once the search results populate, the user can view the brewery's location on the map and their contact information. The user will also be able to star or add breweries to a favorites list, so that they can quickly pull up the info on the go. A link to the brewery will also be displayed.
 
 
 
@@ -24,7 +26,7 @@ Near Beers is a website that allows the user to enter any city, state, or zip co
 
 Near Beer utilizes basic HTML strucure to build the application. Foundation was used as the backbone for CSS and styling of the application. FontAwesome was utlized as well for additionla styling. 
 
-JavaScript with the utilization of Jquery syntax was used to build the functionality of the website. Using Javascript, Near Beers uses a brewery API to gather data about breweries and then dynamically generate that information to the HTML. 
+JavaScript with the utilization of Jquery syntax was used to build the functionality of the website. Using Javascript, Near Beers uses a brewery API to gather data about breweries and then dynamically generate that information to the HTML. Using Jquery syntax, a call to the MapQuest API is also performed, then the map is dynamically inserted into the HTML. 
 
 Searches are saved to localStorage, rendered on the page and are active links to past results. 
 
@@ -54,13 +56,13 @@ Any search you make on Near Beer will also be saved to the page, allowing the us
 
 ## Credits
 
-Trisha 
+Trisha Croatt
 
-Brian
+Brian Ingram
 
-Grant
+Grant Pardington
 
-Tyler
+Tyler Mathews
 
 
 
@@ -97,6 +99,17 @@ SOFTWARE.
 
 ## Contributing
 
+https://github.com/mrmathews08/Near-Beer
+
+https://get.foundation/
+
+https://jquery.com/
+
+https://www.openbrewerydb.org/
+
+https://developer.mapquest.com
+
+https://fontawesome.com/
 
 ## Tests
 

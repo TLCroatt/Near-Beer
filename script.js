@@ -4,8 +4,8 @@ var brewList = [];
 var searchTerm = {text: "",
                 searchType: ""};
 //constants
-const displayNum = 5;  // number of breweries displayed
-const numBrew = 5;     // number of breweries limited in response 
+const displayNum = 10;  // number of breweries displayed
+const numBrew = 10;     // number of breweries limited in response 
 const mapApiKey ="lXw9IgIAR4y4IkigocbWh3gsNoX7Be92";  //API key for mapquest
 
 // Save the cities searched for
@@ -91,15 +91,17 @@ function renderResults(response){
         $(outerDivEl).append(mediaEl);
 
         var media2El = $("<div class= 'media-object-section'>");
-        var nameEl = $("<h4>").text(response[i].name);
+        var nameEl = $("<h4>").text(response[i].name);        
         var addressEl = $("<p>").text(response[i].street);
-        var phoneNumberEl = $("<p>").text(response[i].phone);
-        var urlEl = $("<p>").text(response[i].website_url);
+        var cityEl = $("<p>").text(response[i].city + ", "+response[i].state+"  "+ response[i].postal_code);
+        var phoneNumberEl = $("<p>").text("Phone: "+response[i].phone);
+        var urlEl = $("<p>").text("Website:"+response[i].website_url);
 
-        $(media2El).append(nameEl);
+        $(media2El).append(nameEl);        
         $(media2El).append(addressEl);
+        $(media2El).append(cityEl);
         $(media2El).append(phoneNumberEl);
-        $(urlEl).append(media2El);
+        $(media2El).append(urlEl);
 
         $(outerDivEl).append(media2El);
         $("#search-results").append(outerDivEl);
